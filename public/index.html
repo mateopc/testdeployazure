@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page de test</title>
+</head>
+<body>
+
+    <button id="myButton">Envoyer une requête POST</button>
+
+    <script>
+        document.getElementById("myButton").addEventListener("click", function() {
+            var xhr = new XMLHttpRequest();
+            var url = "http://localhost:3000/api/data";
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var json = JSON.parse(xhr.responseText);
+                    console.log(json.message); // Affiche la réponse du serveur dans la console
+                }
+            };
+            var data = JSON.stringify({"message": "Ceci est un test"});
+            xhr.send(data);
+        });
+    </script>
+
+</body>
+</html>
+
